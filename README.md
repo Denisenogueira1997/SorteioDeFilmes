@@ -1,6 +1,6 @@
 # SorteioDeFilmes
 
-**SorteioDeFilmes** é um aplicativo Android desenvolvido em **Kotlin** que permite aos usuários sortear filmes, séries, animes e desenhos com base nas avaliações dos usuários, utilizando a [API TMDB](https://www.themoviedb.org/).
+**SorteioDeFilmes** é um aplicativo Android desenvolvido em **Kotlin** que permite aos usuários sortear filmes, utilizando a [API TMDB](https://www.themoviedb.org/).
 
 
 
@@ -19,7 +19,7 @@
 
 - **Kotlin:** Linguagem principal para o desenvolvimento Android.
 - **Jetpack Compose:** Framework moderno para construção de interfaces.
-- **API TMDB:** Fonte de dados para filmes, séries, animes e desenhos.
+- **API TMDB:** Fonte de dados para filmes
 - **Room Database:** Armazenamento local para dados persistentes.
 - **Retrofit:** Biblioteca para requisições HTTP.
 - **Glide:** Carregamento eficiente de imagens.
