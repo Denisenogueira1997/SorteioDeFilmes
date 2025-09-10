@@ -27,6 +27,10 @@
 ---
 
 ## Telas
+
+<div style="display: flex; gap: 60px;">
 <img src="https://github.com/user-attachments/assets/e5b76a18-82f3-41b9-972e-7761a5e11509" width="350"/>
+<img src="https://github.com/user-attachments/assets/c2f8c5eb-a4b3-43c0-bca5-200216e97689" width="350"/>
+</div>
 
 
