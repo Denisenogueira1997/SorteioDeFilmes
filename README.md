@@ -25,6 +25,20 @@
 - **Glide:** Carregamento eficiente de imagens.
 
 ---
+MovieSweepstakes
+MovieSweepstakes is an Android application developed in Kotlin that allows users to raffle off movies using the TMDB API.
+
+Features
+Intuitive Interface: Modern and easy-to-use design, developed with Jetpack Compose.
+TMDB Integration: Uses the TMDB API to get up-to-date information about titles.
+Favorites: Allows you to save your favorite titles for easy access later.
+Technologies Used
+Kotlin: Core language for Android development.
+Jetpack Compose: Modern framework for building interfaces.
+TMDB API: Data source for movies.
+Room Database: Local storage for persistent data.
+Retrofit: Library for HTTP requests.
+Glide: Efficient image loading.
 
 ## Telas
 
