@@ -18,6 +18,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -51,96 +52,105 @@ fun MovieSearchScreen(
     val error by viewModel.error.collectAsState()
     val focusManager = LocalFocusManager.current
     var savedMovieIds by remember { mutableStateOf(setOf<Int>()) }
-
     val coroutineScope = rememberCoroutineScope()
 
+    Scaffold(
+        snackbarHost = { androidx.compose.material3.SnackbarHost(snackbarHostState) },
+        containerColor = MaterialTheme.colorScheme.background
+    ) { paddingValues ->
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.onPrimary)
-            .padding(16.dp)
 
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.onPrimary)
+                .padding(8.dp)
+                .padding(paddingValues)
+
+
         ) {
-            SearchBar(
-                searchQuery = searchQuery, onQueryChange = { searchQuery = it }, onClear = {
-                    searchQuery = ""
-                    focusManager.clearFocus()
-                }, onBack = {
-                    navController.popBackStack()
-                    viewModel.clearSearch()
-                }, modifier = Modifier.weight(1f)
-            )
-
-
-
-            IconButton(
-                onClick = {
-                    if (searchQuery.isNotBlank()) {
-                        viewModel.fetchMoviesUnified(searchQuery)
-                        focusManager.clearFocus()
-                    }
-                }, modifier = Modifier
-                    .size(40.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.primary, shape = CircleShape
-                    )
+            Row(
+                verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
             ) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Buscar",
-                    tint = MaterialTheme.colorScheme.onPrimary
+                SearchBar(
+                    searchQuery = searchQuery, onQueryChange = { searchQuery = it }, onClear = {
+                        searchQuery = ""
+                        focusManager.clearFocus()
+                    }, onBack = {
+                        navController.popBackStack()
+                        viewModel.clearSearch()
+                    }, modifier = Modifier
+                        .weight(1f)
+                        .padding(8.dp)
+                )
+
+
+
+                IconButton(
+                    onClick = {
+                        if (searchQuery.isNotBlank()) {
+                            viewModel.fetchMoviesUnified(searchQuery)
+                            focusManager.clearFocus()
+                        }
+                    }, modifier = Modifier
+                        .size(40.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.primary, shape = CircleShape
+                        )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Buscar",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            if (error != null) {
+                Text(
+                    text = "Erro: $error",
+                    color = MaterialTheme.colorScheme.outline,
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
-        }
-
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        if (error != null) {
-            Text(
-                text = "Erro: $error",
-                color = MaterialTheme.colorScheme.outline,
-                style = MaterialTheme.typography.bodyMedium
+            Divider(
+                color = MaterialTheme.colorScheme.outlineVariant,
+                thickness = 1.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
             )
-        }
-        Divider(
-            color = MaterialTheme.colorScheme.outlineVariant,
-            thickness = 1.dp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 4.dp)
-        )
-        LazyColumn {
-            items(movies) { movie ->
-                val isSaved = savedMovieIds.contains(movie.id)
+            LazyColumn {
+                items(movies) { movie ->
+                    val isSaved = savedMovieIds.contains(movie.id)
 
 
 
-                MovieItem(movie = movie, isSaved = isSaved, onAddClick = { selectedMovie ->
-                    coroutineScope.launch {
-                        viewModel.addMovie(selectedMovie)
-                        savedMovieIds = savedMovieIds + selectedMovie.id
+                    MovieItem(movie = movie, isSaved = isSaved, onAddClick = { selectedMovie ->
+                        coroutineScope.launch {
+                            viewModel.addMovie(selectedMovie)
+                            savedMovieIds = savedMovieIds + selectedMovie.id
 
-                        val result = snackbarHostState.showSnackbar(
-                            message = "Filme adicionado",
-                            actionLabel = "Desfazer",
-                            duration = SnackbarDuration.Short,
-                            withDismissAction = true
-                        )
-                        if (result == SnackbarResult.ActionPerformed) {
-                            viewModel.deleteMovie(selectedMovie)
-                            savedMovieIds = savedMovieIds - selectedMovie.id
+                            val result = snackbarHostState.showSnackbar(
+                                message = "Filme adicionado",
+                                actionLabel = "Desfazer",
+                                duration = SnackbarDuration.Short,
+                                withDismissAction = true
+                            )
+                            if (result == SnackbarResult.ActionPerformed) {
+                                viewModel.deleteMovie(selectedMovie)
+                                savedMovieIds = savedMovieIds - selectedMovie.id
+                            }
                         }
-                    }
-                }, onDeleteClick = {})
+                    }, onDeleteClick = {})
+                }
             }
         }
-    }
 
+    }
 }
 
 

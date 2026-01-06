@@ -1,11 +1,12 @@
 package com.example.appparasorteio
 
-import CustomColor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.appparasorteio.ui.theme.AppParaSorteioTheme
+import com.example.appparasorteio.ui.theme.system.SetupSystemBars
 import com.example.appparasorteio.view.Componentes.MainScreenWithBottomNav
 import com.example.appparasorteio.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,12 +15,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
 
         setContent {
 
-            CustomColor {
+            AppParaSorteioTheme(darkTheme = false) {
+                SetupSystemBars()
 
                 val movieViewModel: MovieViewModel = hiltViewModel()
                 MainScreenWithBottomNav(movieViewModel)

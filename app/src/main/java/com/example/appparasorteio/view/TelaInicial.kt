@@ -2,6 +2,7 @@ package com.example.appparasorteio.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -41,7 +42,6 @@ fun TelaInicial(
     val scrollState = rememberScrollState()
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.onPrimary,
         topBar = {
             TopAppBar(
@@ -52,6 +52,7 @@ fun TelaInicial(
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = MaterialTheme.typography.titleMedium.fontWeight
                     )
+
                 }, actions = {
 
                     Surface(
@@ -71,17 +72,18 @@ fun TelaInicial(
                         }
                     }
                 }, colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.onPrimary
-                )
+                    containerColor = MaterialTheme.colorScheme.primary
+                ),
+                modifier = Modifier.fillMaxWidth()
             )
 
         },
-    ) { innerPadding ->
+    ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
-                .padding(innerPadding),
+                .padding(paddingValues)
+                .verticalScroll(scrollState),
             contentAlignment = Alignment.Center
 
         ) {
@@ -121,3 +123,4 @@ fun TelaInicial(
         }
     }
 }
+

@@ -35,10 +35,10 @@ fun MoviesSavedScreen(
         },
         containerColor = MaterialTheme.colorScheme.onPrimary,
 
-        ) { innerPadding ->
+        ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
-                .padding(innerPadding)
+                .padding(paddingValues)
 
         ) {
             items(filmes) { filme ->
