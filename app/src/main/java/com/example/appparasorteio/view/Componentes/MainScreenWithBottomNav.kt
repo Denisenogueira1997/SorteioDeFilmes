@@ -56,11 +56,10 @@ fun MainScreenWithBottomNav(movieViewModel: MovieViewModel) {
         SnackbarHost(
             hostState = snackbarHostState, modifier = Modifier.padding(bottom = 10.dp)
         )
-    }) { innerPadding ->
+    }) {
         NavHost(
             navController = navController,
-            startDestination = "Tela-Inicial",
-            modifier = Modifier.padding(innerPadding)
+            startDestination = "Tela-Inicial"
         ) {
             composable("Tela-Inicial") {
                 TelaInicial(navController, movieViewModel)
