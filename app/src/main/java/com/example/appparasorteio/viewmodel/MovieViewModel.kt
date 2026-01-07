@@ -76,15 +76,6 @@ class MovieViewModel @Inject constructor(private val repository: FilmeRepository
     }
 
 
-    fun clearMovies() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                repository.salvarFilmesLocal(emptyList())
-            }
-            _movies.value = emptyList()
-        }
-    }
-
     suspend fun addMovie(movie: Movie) {
         withContext(Dispatchers.IO) {
             repository.salvarFilmesLocalFilme(movie)

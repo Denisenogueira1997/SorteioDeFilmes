@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -46,8 +47,6 @@ fun FilmeSorteadoCard(
 ) {
     val imageUrl = "https://image.tmdb.org/t/p/w500${detalhes.poster_path}"
     val ano = detalhes.release_date?.take(4) ?: "----"
-    val generos =
-        if (detalhes.genres.isNotEmpty()) detalhes.genres.joinToString(", ") { it.name } else "Gêneros indisponíveis."
     var showDialog by remember { mutableStateOf(false) }
     var removerFavorito by remember { mutableStateOf(false) }
 
@@ -93,10 +92,10 @@ fun FilmeSorteadoCard(
                     Button(
                         onClick = { showDialog = true },
                         modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent),
                         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
                     ) {
-                        Text("Sortear Outro", color = MaterialTheme.colorScheme.outlineVariant)
+                        Text("Sortear Outro", color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }

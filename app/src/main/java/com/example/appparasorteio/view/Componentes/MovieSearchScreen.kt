@@ -56,7 +56,7 @@ fun MovieSearchScreen(
 
     Scaffold(
         snackbarHost = { androidx.compose.material3.SnackbarHost(snackbarHostState) },
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow
     ) { paddingValues ->
 
 
