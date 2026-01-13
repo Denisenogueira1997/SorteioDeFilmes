@@ -25,8 +25,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.appparasorteio.view.Componentes.AddMovieButton
 import com.example.appparasorteio.view.Componentes.EmptyState
 import com.example.appparasorteio.view.Componentes.FilmeSorteadoCard
+import com.example.appparasorteio.view.Componentes.SortearFilmeButton
 import com.example.appparasorteio.viewmodel.MovieViewModel
 
 
@@ -75,7 +77,7 @@ fun TelaInicial(
                 )
             )
 
-        },
+        }
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -89,17 +91,23 @@ fun TelaInicial(
                 filmes.isEmpty() -> {
                     EmptyState(
                         title = "Sua lista está vazia",
-                        description = "Sua lista está vazia no momento. Adicione novos filmes para continuar descobrindo o que assistir!",
-                        TextButton = "Adicionar filme",
-                        botao = { navController.navigate("movie_search") })
+                        description = "Sua lista está vazia no momento. Adicione novos filmes para continuar descobrindo o que assistir!"
+                    ) {
+                        AddMovieButton {
+                            navController.navigate("movie_search")
+                        }
+                    }
                 }
 
                 filmeSorteadoDetalhes == null -> {
                     EmptyState(
                         title = "Nenhum filme sorteado",
-                        description = "Você ainda não sorteou um filme. Toque no botão abaixo para descobrir sua próxima sessão!",
-                        TextButton = "Sortear um filme",
-                        botao = { viewModel.sortearFilme() })
+                        description = "Você ainda não sorteou um filme. Toque no botão abaixo para descobrir sua próxima sessão!"
+                    ) {
+                        SortearFilmeButton {
+                            viewModel.sortearFilme()
+                        }
+                    }
                 }
 
                 else -> {
