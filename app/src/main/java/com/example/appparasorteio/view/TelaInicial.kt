@@ -1,7 +1,10 @@
 package com.example.appparasorteio.view
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -46,32 +49,47 @@ fun TelaInicial(
         containerColor = MaterialTheme.colorScheme.onPrimary,
         topBar = {
             TopAppBar(
-
                 title = {
-                    Text(
-                        "Movie Choice",
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = MaterialTheme.typography.titleMedium.fontWeight
-                    )
+                    Column {
+                        Spacer(
+                            modifier = Modifier
+                                .height(32.dp)
+                                .padding(horizontal = 16.dp)
+                        )
+
+                        Text(
+                            "Movie Choice",
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = MaterialTheme.typography.titleMedium.fontWeight
+                        )
+                    }
 
                 }, actions = {
-
-                    Surface(
-                        modifier = Modifier.size(40.dp),
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primary
+                    Box(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
                     ) {
-                        IconButton(
-                            onClick = {
-                                navController.navigate("movie_search")
-                            }) {
-                            Icon(
-                                imageVector = Icons.Filled.Add,
-                                contentDescription = "Adicionar Filme",
-                                tint = MaterialTheme.colorScheme.onPrimary
-                            )
+
+                        Surface(
+                            modifier = Modifier
+                                .size(40.dp),
+                            shape = CircleShape,
+                            color = MaterialTheme.colorScheme.primary
+                        ) {
+                            IconButton(
+                                onClick = {
+                                    navController.navigate("movie_search")
+                                }) {
+                                Icon(
+                                    imageVector = Icons.Filled.Add,
+                                    contentDescription = "Adicionar Filme",
+                                    tint = MaterialTheme.colorScheme.onPrimary
+                                )
+                            }
                         }
                     }
+
+
                 }, colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.onPrimary
                 )
